@@ -1,327 +1,58 @@
-# NihilS Validator Node. 0G Labs
+# NihilS Validator Node. Vana
 
 
-### Validator Details
+### How to Run a DLP Validator
 
-Operator Address: 0gvaloper1alq9prmm9ea8pk46r2cj79rdk93qfakmmynw62
+Welcome to running a Data Liquidity Pool (DLP) validator! This guide will help you get started with validating user data for specific DLPs.
 
-Node Status: Active
+#### Getting Started
 
-Network: 0G Testnet
+1. **Join Discord**: Please join in [Discord](https://discord.com/invite/withvana) to get an overview of all existing DLPs and how to access them.
 
-### Validator Node
+2. **Minimum Requirements**:
+   - **Hardware**: 1 CPU, 8GB RAM, 10GB free disk space.
+   - **Cloud Providers**: You can run validators on cloud platforms like GCP, AWS, or Azure.
 
-**Hardware Specifications:**
+#### Steps to Run a Validator
 
-CPU: 8 vCPUs
+1. **Choose a DLP**: Select the DLP you want to validate for.
 
-RAM: 32 GB
+2. **Validator Registration**:
+   - Register as a validator through the DLP's smart contract.
+   - Ensure you meet the minimum staking requirements for the DLP.
 
-Storage: 1 TB SSD
+3. **Approval Process**: Wait for your registration request to be approved by the DLP.
 
-Network Bandwidth: 1 Gbps
+4. **Node Deployment**:
+   - Deploy the validator node specific to the chosen DLP.
+   - Confirm that your validator is running correctly. Check your logs for validation like this:
 
-**Software Specifications:**
+   ```
+   Logs for a ChatGPT DLP validator node
+   [Insert specific logs here]
+   ```
 
-Operating System: Ubuntu 20.04 LTS
+5. **Track Your Stats**: Congratulations, your validator is up and running! Monitor your stats and trust score on-chain.
 
-0G Node Version: Latest release (e.g., v1.0.0)
+#### Deploy Validators
 
-**Installation and Setup**
+Once your validator is built, you can deploy it to form a peer-to-peer network within the DLP. Ensure each node has a static IP for easier communication. Each node must also have a wallet to register with the DLP and start serving proof-of-contribution requests.
 
-System Update and Dependencies Installation
+#### Smart Contract Deployment
 
-```
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install build-essential jq -y
-```
+1. **Clone and Modify**: Clone the DLP smart contract template and modify it according to your DLP's specific needs.
 
-Go Installation
+2. **Deployment**: Follow the README instructions to deploy the modified smart contract to the network.
 
-```
-wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
-echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
-source ~/.profile
-```
+#### Validator Registration
 
-Clone 0G Repository and Build
+The DLP smart contract manages validator registrations, allowing them to maintain network integrity and earn rewards for contributions. To register a new node, create a wallet and call the registration function in the DLP smart contract.
 
-```
-git clone https://github.com/0G-Network/0g
-cd 0g
-make install
-```
+#### Scoring Process
 
-Initialize Node
+Validators earn rewards for validating uploaded files based on data metrics relevant to the DLP. Rewards are distributed every 1800 blocks (~3 hours) using the Nagoya consensus process:
 
-```
-0gd init "NihilS-Validator" --chain-id 0g-testnet
-```
+- **Consensus Process**: Validators score each other based on assessment quality and operational performance.
+- **Emission Calculation**: Rewards are calculated based on validator rank and consensus scores, ensuring fair distribution aligned with contributions to the DLP.
 
-Configure Node
-
-```
-Update ~/.0g/config/genesis.json with the latest genesis file.
-Configure ~/.0g/config/config.toml for networking and peers.
-```
-
-Start the Node
-
-```
-0gd start
-```
-### Node Performance and Monitoring:
-
-Snapshots: Regular snapshots are taken to ensure quick recovery in case of failure.
-
-```
-0g tendermint unsafe-reset-all
-wget -O ~/.0g/data/priv_validator_state.json https://snapshot.url/priv_validator_state.json
-wget -O ~/.0g/data/ https://snapshot.url/data.tar.gz
-tar -xzvf data.tar.gz -C ~/.0g/data/
-```
-
-Logs Monitoring:
-
-```
-tail -f ~/.0g/logs/0g.log
-```
-
-System Metrics Monitoring: Utilizing Prometheus and Grafana for real-time metrics.
-
-```
-prometheus:
-  scrape_configs:
-    - job_name: '0g_node'
-      static_configs:
-        - targets: ['localhost:26660']
-```
-**Reports:**
-
-Uptime Reports: Maintained 99.9% uptime since inception.
-
-Voting Power: Actively participating in governance with [X%] voting power.
-
-Delegations: Secure and transparent delegation policies in place.
-
-Security Measures:
-
-Firewall: Configured to only allow essential ports.
-
-```
-sudo ufw allow 26656,26657/tcp
-sudo ufw enable
-```
-
-Backups: Regular backups of validator keys and state.
-
-```
-cp ~/.0g/config/priv_validator_key.json /backup/location/
-cp ~/.0g/config/node_key.json /backup/location/
-```
-
-**Community Engagement:**
-
-Support: Actively participating in the 0G community forums and support channels.
-
-Updates: Regular updates and maintenance to ensure node compliance with network upgrades.
-
-# Storage Node. 0G Labs
-
-### Hardware Specifications:
-
-CPU: 16 vCPUs
-
-RAM: 64 GB
-
-Storage: 4 TB SSD
-
-Network Bandwidth: 1 Gbps
-
-### Software Specifications:
-
-Operating System: Ubuntu 20.04 LTS
-
-0G Storage Node Version: Latest release (e.g., v1.0.0)
-
-### Installation and Setup:
-
-System Update and Dependencies Installation
-
-```
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install build-essential jq -y
-```
-
-Go Installation:
-
-```
-wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
-echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
-source ~/.profile
-```
-Clone 0G Storage Repository and Build:
-
-```
-git clone https://github.com/0G-Network/storage
-cd storage
-make install
-```
-Initialize Node:
-
-```
-0g-storage init "NihilS-Storage" --chain-id 0g-testnet
-```
-Configure Node:
-```
-Update ~/.0g-storage/config/genesis.json with the latest genesis file.
-Configure ~/.0g-storage/config/config.toml for networking and peers.
-```
-Start the Node:
-
-```
-0g-storage start
-```
-Node Performance and Monitoring:
-
-Data Integrity: Regular integrity checks and backups.
-
-Logs Monitoring:
-
-```
-tail -f ~/.0g-storage/logs/storage.log
-```
-System Metrics Monitoring: Utilizing Prometheus and Grafana for real-time metrics.
-
-```
-prometheus:
-  scrape_configs:
-    - job_name: '0g_storage_node'
-      static_configs:
-        - targets: ['localhost:26660']
-```
-
-### Reports:
-
-Uptime Reports: Maintained 99.9% uptime since inception.
-
-Data Stored: Managing [X TB] of data with high availability and redundancy.
-
-Security Measures:
-
-Firewall: Configured to only allow essential ports.
-
-```
-sudo ufw allow 26656,26657/tcp
-sudo ufw enable
-```
-
-Backups: Regular backups of storage data and state.
-
-```
-rsync -avz ~/.0g-storage/data/ /backup/location/
-```
-**Community Engagement:**
-
-Support: Actively participating in the 0G community forums and support channels.
-
-Updates: Regular updates and maintenance to ensure node compliance with network upgrades.
-
-# KV Node. 0G Labs
-
-### Hardware Specifications:
-
-CPU: 8 vCPUs
-
-RAM: 32 GB
-
-Storage: 1 TB SSD
-
-Network Bandwidth: 1 Gbps
-
-### Software Specifications:
-
-Operating System: Ubuntu 20.04 LTS
-
-0G KV Node Version: Latest release (e.g., v1.0.0)
-
-Installation and Setup:
-
-System Update and Dependencies Installation:
-
-```
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install build-essential jq -y
-```
-Go Installation:
-
-```
-wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
-echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
-source ~/.profile
-```
-Clone 0G KV Repository and Build:
-
-```
-git clone https://github.com/0G-Network/kv
-cd kv
-make install
-```
-Initialize Node:
-
-```
-0g-kv init "NihilS-KV" --chain-id 0g-testnet
-```
-Configure Node:
-```
-Update ~/.0g-kv/config/genesis.json with the latest genesis file.
-Configure ~/.0g-kv/config/config.toml for networking and peers.
-```
-Start the Node:
-
-```
-0g-kv start
-```
-### Node Performance and Monitoring:
-
-**Data Integrity: Regular integrity checks and backups.**
-
-Logs Monitoring:
-
-```
-tail -f ~/.0g-kv/logs/kv.log
-System Metrics Monitoring: Utilizing Prometheus and Grafana for real-time metrics.
-```
-
-```
-prometheus:
-  scrape_configs:
-    - job_name: '0g_kv_node'
-      static_configs:
-        - targets: ['localhost:26660']
-```
-
-### Reports:
-
-Uptime Reports: Maintained 99.9% uptime since inception.
-
-Data Managed: Efficiently managing key-value pairs with low latency and high availability.
-
-### Security Measures:
-
-Firewall: Configured to only allow essential ports.
-
-```
-sudo ufw allow 26656,26657/tcp
-sudo ufw enable
-```
-Backups: Regular backups of KV store data and state.
-
-```
-rsync -avz ~/.0g-kv/data/ /backup/location/
-```
-### Community Engagement:
-Support: Actively participating in the
+By following these steps, you can effectively run a DLP validator and contribute to the integrity and security of the network. For further assistance, visit our Discord community in the #testnet-help channel.
