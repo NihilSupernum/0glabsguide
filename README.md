@@ -27,10 +27,10 @@ Welcome to running a Data Liquidity Pool (DLP) validator! This guide will help y
    - Deploy the validator node specific to the chosen DLP.
    - Confirm that your validator is running correctly. Check your logs for validation like this:
 
-   ```
-   Logs for a ChatGPT DLP validator node
-   [Insert specific logs here]
-   ```
+![image](https://github.com/user-attachments/assets/420fee50-ae5e-453d-b2c5-1b0f3d4f4385)
+
+
+
 
 5. **Track Your Stats**: Congratulations, your validator is up and running! Monitor your stats and trust score on-chain.
 
